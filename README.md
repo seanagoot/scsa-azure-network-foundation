@@ -78,7 +78,7 @@ The network implements basic defense-in-depth principles:
 
 ## Architecture Diagram
 
-![Azure Network Architecture](./scsa-azure-network-architecture.png)
+![Azure Network Architecture](./architecture/scsa-azure-network-architecture.png)
 
 ## Azure Resources
 
