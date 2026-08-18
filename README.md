@@ -17,6 +17,10 @@ The initial design separates:
 
 The objective is to establish a secure network baseline before deploying virtual machines and application services.
 
+## Architecture Diagram
+
+![Azure Network Architecture](./architecture/scsa-azure-network-architecture.png)
+
 ## Architecture
 
 ### Azure Region
@@ -71,14 +75,10 @@ The network implements basic defense-in-depth principles:
 
 - Network segmentation using separate subnets
 - NSGs applied to individual subnets
-- Public HTTP access limited to the web subnet
+- Public HTTP access permitted only through the web subnet's NSG
 - Management SSH access restricted to the virtual network
 - Default NSG deny rules retained
 - Least-privilege network access
-
-## Architecture Diagram
-
-![Azure Network Architecture](./architecture/scsa-azure-network-architecture.png)
 
 ## Azure Resources
 
@@ -90,6 +90,45 @@ The following Azure resources were created:
 - Management Subnet
 - Web Network Security Group
 - Management Network Security Group
+
+## Implementation
+
+The Azure network foundation was deployed using Azure CLI scripts.
+
+### Deployment Scripts
+
+- [01-resource-group.sh](./scripts/01-resource-group.sh) – Creates the production resource group.
+- [02-network.sh](./scripts/02-network.sh) – Creates the virtual network and application subnets.
+- [03-nsg-rules.sh](./scripts/03-nsg-rules.sh) – Creates the Network Security Groups, configures inbound security rules, and associates the NSGs with their respective subnets.
+
+The scripts provide a repeatable command-line deployment approach and document the implementation of the environment.
+
+## Validation
+
+Azure CLI was used to verify:
+
+- Resource group deployment
+- Virtual network configuration
+- Subnet configuration
+- NSG configuration
+- NSG-to-subnet associations
+- Security rules
+
+The deployed configuration was validated against the intended network and security design.
+
+## Implementation Evidence
+
+Detailed implementation and validation screenshots are available in the [`screenshots`](./screenshots/) directory.
+
+The evidence includes:
+
+- Resource group creation
+- Virtual network and subnet configuration
+- Network validation
+- Web NSG configuration
+- Management NSG configuration
+- NSG security rules
+- NSG-to-subnet associations
 
 ## Skills Demonstrated
 
@@ -103,19 +142,10 @@ The following Azure resources were created:
 - Basic cloud security architecture
 - Infrastructure documentation
 
-## Validation
-
-Azure CLI was used to verify:
-
-- Resource group deployment
-- Virtual network configuration
-- Subnet configuration
-- NSG configuration
-- NSG-to-subnet associations
-- Security rules
-
 ## Project Status
 
-**Network foundation completed.**
+**Completed**
 
-The environment is ready for the next stage of the project.
+The Azure network foundation has been deployed and validated.
+
+The environment establishes the networking and security baseline required for subsequent compute, identity, and application infrastructure.
